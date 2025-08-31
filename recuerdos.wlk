@@ -1,47 +1,65 @@
 import elAlambiqueViajero.*
 
 object paris {
-  method recuerdo()="llaveroEifel"
-  method puedeViajar(vehiculo) {
-    return vehiculo.combustible() >0
-  }
+  method recuerdo() = "llaveroEifel"
+  
+  method puedeViajar(vehiculo) = vehiculo.combustible() > 0
 }
+
 object buenosAires {
-  var yerba=true  
-  method recuerdo()="mate" + yerba
-  method puedeViajar(vehiculo){
-    return vehiculo.velocidad()
+  var yerba = true
+  
+  method recuerdo() {
+    var recuerdo = "mate"
+    if (yerba) {
+      recuerdo = "mate con yerba"
+    }
+    return recuerdo
+  }
+  
+  method puedeViajar(vehiculo) = vehiculo.velocidad() > 80
+  
+  method hayYerba(nuevoValor) {
+    yerba = nuevoValor
   }
 }
+
 object bagdad {
-  var recuerdo= "petroleoCrudo"
-  method recuerdo()=recuerdo
+  var recuerdo = "petroleoCrudo"
+  
+  method recuerdo() = recuerdo
+  
   method cambiarRecuerdoA(nuevoRecuerdo) {
-    recuerdo= nuevoRecuerdo
+    recuerdo = nuevoRecuerdo
   }
-  method puedeViajar(vehiculo) {
-  }
+  
+  method puedeViajar(vehiculo) = true
 }
+
 object lasVegas {
-  var recuerdo=paris.recuerdo()
+  var recuerdo = paris.recuerdo()
+  var paisConmemorado = paris
+  
   method conmemorarA(pais) {
-    recuerdo=pais.recuerdo()
+    paisConmemorado = pais
+    recuerdo = pais.recuerdo()
   }
-  method recuerdo()=recuerdo
+  
+  method recuerdo() = recuerdo
+  
   method puedeViajar(vehiculo) {
-    recuerdo.puedeViajar(vehiculo)
+    return paisConmemorado.puedeViajar(vehiculo)
   }
 }
 
 object italia {
-  method recuerdo()="miniTorrePizza"
-    method puedeViajar(vehiculo){
-    return vehiculo.velocidad()
-  }
+  method recuerdo() = "miniTorrePizza"
+  
+  method puedeViajar(vehiculo) = vehiculo.velocidad() > 80
 }
 
 object ninguno {
-  method recuerdo()="nada"
-  method puedeViajar(vehiculo) {
-  }
+  method recuerdo() = "nada"
+  
+  method puedeViajar(vehiculo) = true
 }

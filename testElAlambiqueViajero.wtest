@@ -1,0 +1,16 @@
+import elAlambiqueViajero.*
+import recuerdos.*
+
+describe "test de pruebas 1" {
+  test "luke viaja hacia italia y buenosAires y su cantidad de lugares visitados es 2" {
+    luke.viajarA(lasVegas)
+    luke.viajarA(buenosAires)
+    assert.equals(2, luke.cantLugaresVisitados())
+  }
+  test"luke cambia de vehiculo a super chatarra especial, carga 6 de municion y su combustible es de 112 "{
+    luke.cambiarDeAuto(superChatarraEspecial)
+    superChatarraEspecial.cargarMunicion(6)
+    assert.equals(112, superChatarraEspecial.combustible())
+  }
+}
+

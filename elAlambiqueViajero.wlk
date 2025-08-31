@@ -1,66 +1,113 @@
 import recuerdos.*
-object alambiqueVeloz {
-  var lugaresVistos=0
-  var ultimoRecuerdo=ninguno.recuerdo()
-  var combustible=0
-  method velocidad()=100
-  method cantLugares()=lugaresVistos
-  method ultimoRecuerdo() =ultimoRecuerdo
-  method viajarA(destino) {
-    if(destino.puedeViajar(self)){
-    ultimoRecuerdo=destino.recuerdo()
-    lugaresVistos+=1
-    combustible-=50}
-  }
-  method combustible() =combustible
+
+object luke {
+  var lugaresVistos = 0
+  var vehiculoUsado = alambiqueVeloz
+  var ultimoRecuerdo = ninguno.recuerdo()
   
+  method cantLugaresVisitados() = lugaresVistos
+  
+  method ultimoRecuerdo() = ultimoRecuerdo
+  
+  method viajarA(destino) {
+    if (destino.puedeViajar(vehiculoUsado)) {
+      ultimoRecuerdo = destino.recuerdo()
+      lugaresVistos += 1
+      vehiculoUsado.gastarCombustible(50)
+    }
+  }
+  
+  method cambiarDeAuto(autoNuevo) {
+    vehiculoUsado = autoNuevo
+  }
 }
+
+object alambiqueVeloz {
+  var combustible = 100
+  var velocidad = 100
+  
+  method velocidad() = velocidad
+  
+  method gastarCombustible(cantidad) {
+    combustible -= cantidad
+  }
+  
+  method bajarVelocidad(cantidad) {
+    velocidad -= cantidad
+  }
+  
+  method gangster() = 0
+  
+  method combustible() = combustible
+}
+
 object superChatarraEspecial {
-  var lugaresVistos=0
-  var ultimoRecuerdo=ninguno.recuerdo()
-  method velocidad() =100
-  var municiones=30
-  var combustible=0
-  method cantLugares()=lugaresVistos
-  method ultimoRecuerdo() =ultimoRecuerdo
-  method viajarA(destino) {
-    if(destino.puedeViajar(self)){
-    ultimoRecuerdo=destino.recuerdo()
-    lugaresVistos+=1
-    combustible-=50}
+  var municiones = 50
+  var velocidad = 100
+  
+  method velocidad() = velocidad
+  
+  method gastarCombustible(cantidad) {
+    municiones -= cantidad / 2
   }
-  method combustible()=municiones*2
+  
+  method combustible() = municiones * 2
+  
+  method bajarVelocidad(cantidad) {
+    velocidad -= cantidad
+  }
+  
+  method gangster() = 0
+  
   method cargarMunicion(cant) {
-    municiones=cant
+    municiones += cant
   }
 }
+
 object antiguallaBlindada {
-  var lugaresVistos=0
-  var ultimoRecuerdo=ninguno.recuerdo()
-  var combustible=0
-  var gangster=0
-  var velocidad=100
-  method cantLugares()=lugaresVistos
-  method ultimoRecuerdo() =ultimoRecuerdo
-  method viajarA(destino) {
-    if(destino.puedeViajar(self)){
-    ultimoRecuerdo=destino.recuerdo()
-    lugaresVistos+=1
-    combustible-=50}
-
+  var combustible = 100
+  var gangster = 0
+  var velocidad = 100
+  
+  method gastarCombustible(cantidad) {
+    combustible -= cantidad
   }
-  method combustible() =combustible
-  method ponerMasGangster(cantidad) {
-    gangster+=cantidad
-    velocidad=velocidad-gangster  
+  
+  method combustible() = combustible
+  
+  method bajarVelocidad(cantidad) {
+    gangster += cantidad
+    velocidad -= gangster
   }
-  method velocidad()=velocidad
-
+  
+  method gangster() = gangster
+  
+  method velocidad() = velocidad
 }
+
 object superConvertible {
-  var vehiculoTransformado=antiguallaBlindada
-  method transformarseA(nuevoVehiculo){
-    vehiculoTransformado=nuevoVehiculo
+  var combustible = vehiculoTransformado.combustible()
+  var velocidad = vehiculoTransformado.velocidad()
+  var vehiculoTransformado = antiguallaBlindada
+  var gangster = 0
+  
+  method transformarseA(nuevoVehiculo) {
+    vehiculoTransformado = nuevoVehiculo
+    combustible = vehiculoTransformado.combustible()
+    velocidad = vehiculoTransformado.velocidad()
+    gangster = vehiculoTransformado.gangster()
   }
+  
+  method gastarCombustible(cantidad) {
+    combustible -= cantidad
+  }
+  
+  method bajarVelocidad(cantidad) {
+    gangster += cantidad
+    velocidad -= gangster
+  }
+  
+  method combustible() = combustible
+  
+  method velocidad() = velocidad
 }
-
