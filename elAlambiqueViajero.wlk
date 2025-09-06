@@ -1,5 +1,4 @@
 import recuerdos.*
-
 object luke {
   var lugaresVistos = 0
   var vehiculoUsado = alambiqueVeloz
@@ -13,7 +12,7 @@ object luke {
     if (destino.puedeViajar(vehiculoUsado)) {
       ultimoRecuerdo = destino.recuerdo()
       lugaresVistos += 1
-      vehiculoUsado.gastarCombustible(50)
+      vehiculoUsado.gastarCombustible()
     }
   }
   
@@ -25,13 +24,14 @@ object luke {
 object alambiqueVeloz {
   var combustible = 100
   var velocidad = 100
-  
+  var combustibleConsumido=50
   method velocidad() = velocidad
-  
-  method gastarCombustible(cantidad) {
-    combustible -= cantidad
+  method cantConsumida(num){
+    combustibleConsumido=num
   }
-  
+  method gastarCombustible() {
+    combustible -= combustibleConsumido
+  }
   method bajarVelocidad(cantidad) {
     velocidad -= cantidad
   }
@@ -44,11 +44,13 @@ object alambiqueVeloz {
 object superChatarraEspecial {
   var municiones = 50
   var velocidad = 100
-  
+  var combustibleConsumido=50
   method velocidad() = velocidad
-  
+  method cantConsumida(num){
+    combustibleConsumido=num
+  }
   method gastarCombustible(cantidad) {
-    municiones -= cantidad / 2
+    municiones -= combustibleConsumido / 2
   }
   
   method combustible() = municiones * 2
@@ -68,11 +70,14 @@ object antiguallaBlindada {
   var combustible = 100
   var gangster = 0
   var velocidad = 100
-  
-  method gastarCombustible(cantidad) {
-    combustible -= cantidad
+  var combustibleConsumido=50
+
+  method cantConsumida(num){
+    combustibleConsumido=num
   }
-  
+  method gastarCombustible() {
+    combustible -= combustibleConsumido
+  }
   method combustible() = combustible
   
   method bajarVelocidad(cantidad) {
@@ -90,18 +95,19 @@ object superConvertible {
   var velocidad = vehiculoTransformado.velocidad()
   var vehiculoTransformado = antiguallaBlindada
   var gangster = 0
-  
+  var combustibleConsumido=50
   method transformarseA(nuevoVehiculo) {
     vehiculoTransformado = nuevoVehiculo
     combustible = vehiculoTransformado.combustible()
     velocidad = vehiculoTransformado.velocidad()
     gangster = vehiculoTransformado.gangster()
   }
-  
-  method gastarCombustible(cantidad) {
-    combustible -= cantidad
+    method cantConsumida(num){
+    combustibleConsumido=num
   }
-  
+  method gastarCombustible() {
+    combustible -= combustibleConsumido
+  }
   method bajarVelocidad(cantidad) {
     gangster += cantidad
     velocidad -= gangster

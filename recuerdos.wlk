@@ -1,28 +1,38 @@
 import elAlambiqueViajero.*
 
 object paris {
+  var combustibleNecesario=0
   method recuerdo() = "llaveroEifel"
-  
-  method puedeViajar(vehiculo) = vehiculo.combustible() > 0
+  method combustibleNecesario(cantidad){
+    combustibleNecesario=cantidad
+  }
+  method puedeViajar(vehiculo){
+    return vehiculo.combustible() > combustibleNecesario
+  }
 }
 
 object buenosAires {
-  var yerba = true
-  
+  var recuerdo="mate"
+  var velocidadNecesaria=50
   method recuerdo() {
-    var recuerdo = "mate"
-    if (yerba) {
-      recuerdo = "mate con yerba"
-    }
     return recuerdo
   }
-  
-  method puedeViajar(vehiculo) = vehiculo.velocidad() > 80
-  
-  method hayYerba(nuevoValor) {
-    yerba = nuevoValor
+  method nuevoPresidente(leGustaLaYerba) {
+    if (leGustaLaYerba) {
+      recuerdo="mate con yerba"
+    }
+    else{
+      recuerdo="mate sin yerba "
+    }
   }
+  method velocidadNecesaria(cant){
+    velocidadNecesaria=cant
+  }
+  method puedeViajar(vehiculo){
+    return vehiculo.velocidad()>velocidadNecesaria
+  } 
 }
+
 
 object bagdad {
   var recuerdo = "petroleoCrudo"
@@ -33,16 +43,17 @@ object bagdad {
     recuerdo = nuevoRecuerdo
   }
   
-  method puedeViajar(vehiculo) = true
+  method puedeViajar(vehiculo) {
+    return true
+  }
 }
 
 object lasVegas {
   var recuerdo = paris.recuerdo()
-  var paisConmemorado = paris
-  
+  var paisConmemorado=paris
   method conmemorarA(pais) {
-    paisConmemorado = pais
     recuerdo = pais.recuerdo()
+    paisConmemorado=pais
   }
   
   method recuerdo() = recuerdo
@@ -53,13 +64,20 @@ object lasVegas {
 }
 
 object italia {
+  var velocidadNecesaria=50
   method recuerdo() = "miniTorrePizza"
-  
-  method puedeViajar(vehiculo) = vehiculo.velocidad() > 80
+  method velocidadNecesaria(cant){
+    velocidadNecesaria=cant
+  }
+    method puedeViajar(vehiculo){
+    return vehiculo.velocidad()>velocidadNecesaria
+  } 
 }
 
 object ninguno {
   method recuerdo() = "nada"
   
-  method puedeViajar(vehiculo) = true
+  method puedeViajar(vehiculo) {
+    return true
+  }
 }
